@@ -1,10 +1,10 @@
 ﻿==================================
 Graphite.
  
-I. Tìm hiểu về graphite
- 1. Graphite : 
-   - là 1 ứng dụng thu thập, lưu trữ và hiển thị thông tin máy chủ và các ứng dụng.
-   - thư viện đồ họa nhiêu thành phần sử dụng để  hiển thị thông số hình ảnh theo thời gian thực
+##### I. Tìm hiểu về graphite
+  1. Graphite : 
+     - là 1 ứng dụng thu thập, lưu trữ và hiển thị thông tin máy chủ và các ứng dụng.
+     - thư viện đồ họa nhiêu thành phần sử dụng để  hiển thị thông số hình ảnh theo thời gian thực
   2.Các thành phần
    
    * Graphite-webapp:
@@ -12,17 +12,17 @@ I. Tìm hiểu về graphite
 	 - Cung câp giao diện đồ họa  để hiển thị các thông số từ máy chủ và ứng dụng.
 	 - Tạo đồ thị dựa trên dữ liệu mà nó nhận được
 	 => chỉ hiển thị biểu đồ không lưu trữ lại dữ liệu.
-	*Carbon:
-	 -thành phần lưu trữ dữ liệu của graphite
-	 -Xử lý dữ liệu được gửi qua câc tiến trình khác để thu thập và truyền tải số liệu thống kê.
+   * Carbon:
+      -thành phần lưu trữ dữ liệu của graphite
+      -Xử lý dữ liệu được gửi qua câc tiến trình khác để thu thập và truyền tải số liệu thống kê.
 	 
-	*Whiper:
+   * Whiper:
 	 - là thư viện CSDL của Graphite => sử dụng lưu thông tin nhận được.
 	 - cung cấp nhanh và tin cậy số liệu theo thời gian thực.
 	 
    3. Các thành phần khác:
    
-     Graphite chỉ thống kê thông tin dữ liệu dựa vào 2 thành phần là StatD,Collectd.
+     Graphite chỉ thống kê thông tin dữ liệu dựa vào 1 trong 2  thành phần là StatD,Collectd.
    
    
     a.Collectd:
@@ -39,18 +39,16 @@ I. Tìm hiểu về graphite
 	  
 	  Mô hình : 
 	     
-	  
 	     <img src="http://i.imgur.com/nlXfCmX.png">
 	  
-	 1. Cài đặt Graphite :
+      1. Cài đặt Graphite :
             
-		* Cập nhập Os và cài các gói:
-		 ```
-		    sudo apt-get update
-			sudo apt-get install graphite-web graphite-carbon
-		 ```
-		 
-		* Cấu hình  CSDL với Django:
+	* Cập nhập Os và cài các gói:
+	```
+	  sudo apt-get update
+	  sudo apt-get install graphite-web graphite-carbon
+         ```
+	* Cấu hình  CSDL với Django:
 		 
         - cài PostgreSQL:
         ```
@@ -58,80 +56,79 @@ I. Tìm hiểu về graphite
 
         ```		
         -Create a Database User and a Database:
-		 ```
-		   sudo -u postgres psql
-		   CREATE USER graphite WITH PASSWORD 'password';
+	  ```
+           sudo -u postgres psql
+	   CREATE USER graphite WITH PASSWORD 'password';
            CREATE DATABASE graphite WITH OWNER graphite;
            \q
-
-		 ```
-		* Cấu hình  Graphite-webapp :
-		 
-		 ```
-		   sudo nano /etc/graphite/local_settings.py
-         ```
-		 - sửa file:
-		 ```
-		   SECRET_KEY = 'a_salty_string'
+        ```
+	* Cấu hình  Graphite-webapp :
+        ```
+           sudo nano /etc/graphite/local_settings.py
+        ```
+        - sửa file:
+	```
+	 SECRET_KEY = 'a_salty_string'
 		   
-           TIME_ZONE = 'Asia/Ho_Chi_Minh'
+         TIME_ZONE = 'Asia/Ho_Chi_Minh'
 		   
-		   USE_REMOTE_USER_AUTHENTICATION = True
+         USE_REMOTE_USER_AUTHENTICATION = True
            
-		   DATABASES = {
-			'default': {
-				'NAME': 'graphite',
-				'ENGINE': 'django.db.backends.postgresql_psycopg2',
-				'USER': 'graphite',
-				'PASSWORD': 'password',
-				'HOST': '127.0.0.1',
-				'PORT': ''
-				}
-			}
+         DATABASES = {
+	    'default': {
+		'NAME': 'graphite',
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'USER': 'graphite',
+		'PASSWORD': 'password',
+		'HOST': '127.0.0.1',
+		'PORT': ''
+	   }
+	}
 
-		 ```
-		-  Đồng bộ dữ liệu:
-		```
-		   sudo graphite-manage syncdb
+	 ```
+	-  Đồng bộ dữ liệu:
+	```
+	 sudo graphite-manage syncdb
 
-		```
-		* Cấu hình Carbon:
+	```
+	* Cấu hình Carbon:
         
-		- bật dịch vụ carbon :
-		```
-		 sudo nano /etc/default/graphite-carbon
+	- bật dịch vụ carbon :
+	```
+	sudo nano /etc/default/graphite-carbon
          
-		CARBON_CACHE_ENABLED=true
+	CARBON_CACHE_ENABLED=true
 
         ```		
-		- sửa file : ```
-		             sudo nano /etc/carbon/carbon.conf
+	- sửa file : 
+	```
+          sudo nano /etc/carbon/carbon.conf
+        ```
+        
+	```
+	  ENABLE_LOGROTATION = True
 
-		             ```
-	    ```
-		 ENABLE_LOGROTATION = True
-
-		```
+        ```
         - Cài đặt và cấu hình Apache:
 		
-		 ```
-		  sudo apt-get install -y apache2 libapache2-mod-wsgi
+	 ```
+	sudo apt-get install -y apache2 libapache2-mod-wsgi
 
-		 ```
-		- tắt dịch vụ host ảo :
-		 ```
-		   sudo a2dissite 000-default
-		 ```
-		- Next, copy the Graphite Apache virtual host file into the available sites directory:
+	 ```
+	- tắt dịch vụ host ảo :
+	 ```
+	 sudo a2dissite 000-default
+	```
+	- Next, copy the Graphite Apache virtual host file into the available sites directory:
          ```
-		  sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
+	sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
 
-		 ```
+	 ```
         - Enable host ảo:
-		 ```
-		  sudo a2ensite apache2-graphite
+	 ```
+	sudo a2ensite apache2-graphite
 
-		 ```
+	 ```
         - Khởi động lại dịch vụ Apache:
 		 ```
 		  sudo service apache2 reload
