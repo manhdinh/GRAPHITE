@@ -14,7 +14,7 @@ test -f $ifaces.orig || cp $ifaces $ifaces.orig
 rm $ifaces
 touch  $iface
 
-cat <<EOF >$iface
+cat <<EOF >>$iface
   auto eth0				      
   iface eth0 inet static 	
   address  172.16.1.78  	  
@@ -23,7 +23,7 @@ cat <<EOF >$iface
   dns-nameservers 8.8.8.8 
 EOF
 
-/etc/init.d
+/etc/init.d/networking restart
 sleep 3
 
 echo "------------------------------------------------------"
