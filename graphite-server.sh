@@ -15,6 +15,13 @@ rm $ifaces
 touch  $iface
 
 cat <<EOF >>$iface
+
+  # The loopback network interface
+ auto lo
+ iface lo inet loopback
+
+  # The primary network interface
+
   auto eth0				      
   iface eth0 inet static 	
   address  172.16.1.78  	  
