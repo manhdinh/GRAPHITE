@@ -14,7 +14,7 @@ echo "----=--Configure collectd -client--=------"
   #-----------------Tao file moi rong-----------------------------------------
    touch $collectd
   #---------------------------------------------------------------------------
-  cat <<EOF > $collectd
+  echo <<EOF > $collectd
     
     FQDNLookup true
 	Interval 10
