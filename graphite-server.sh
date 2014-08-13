@@ -81,8 +81,3 @@ echo "-----------khoi dong lai dich vu Apache2----------------------------------
 sudo service apache2 reload
 #------------------------------------------------------------------------------------"
 echo " truy cap vao tai khoan http://172.16.69.71 ( ip server) "
-echo "--Cai dat va cau hinh Collectd tren may server-----------------------------"
-apt-get update
-apt-get install  -y collectd collectd-utils
-echo "------------------------------------------------------------------------------"
- 
