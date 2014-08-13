@@ -2,7 +2,6 @@
 #!/bin/bash 
 
 eth0_address=`/sbin/ifconfig eth0 | awk '/inet addr/ {print $2}' | cut -f2 -d ":" `
-host ='cat /etc/hostname'
 echo "-------------- Cap nhat he thong ------------------"
    apt-get update && apt-get -y dist-upgrade 
    apt-get -y upgrade && apt-get -f install
@@ -21,17 +20,21 @@ cat << EOF |sudo -u postgres psql
   CREATE USER graphite WITH PASSWORD 'Admin123';
   CREATE DATABASE graphite WITH OWNER graphite;
  \q
-EOF 
+EOF
+
 echo " ------------------------------------------------------------"
 
 echo "------------------Cau hinh graphite web-app-----------------"
-cp /etc/graphite/local_settings.py /etc/graphite/local_settings.py.bka 
 
-rm /etc/graphite/local_settings.py   
-
-touch /etc/graphite/local_settings.py
+filecollectd=/etc/graphite/local_settings.py
+#-------------------------------------------------------
+test -f $filecollectd.bka || cp $filecollectd $filecollectd.bka
+#-------------------------------------------------------- 
+rm $filecollectd
+#-----------------Tao file moi rong-----------------------------------------
+touch $filecollectd
 #---------------------------------------------------------------------------------- 
-cat  <<EOF  >> /etc/graphite/local_settings.py 
+cat << EOF >> $filecollectd 
 SECRET_KEY = 'a_salty_string'
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
 LOG_RENDERING_PERFORMANCE = True
@@ -45,6 +48,7 @@ WHISPER_DIR = '/var/lib/graphite/whisper'
 LOG_DIR = '/var/log/graphite'
 INDEX_FILE = '/var/lib/graphite/search_index'  # Search index file
 USE_REMOTE_USER_AUTHENTICATION = True
+
 DATABASES = {
 'default': {
 'NAME': 'graphite',
@@ -86,8 +90,11 @@ sudo a2ensite apache2-graphite
 echo "-----------khoi dong lai dich vu Apache2--------------------------------------"
 sudo service apache2 reload
 #------------------------------------------------------------------------------------"
-echo " truy cap vao tai khoan http://172.16.69.71 ( ip server) "
+echo " truy cap vao tai khoan http://" $eth0_address
 
 #------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
