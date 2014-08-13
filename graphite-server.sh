@@ -1,5 +1,5 @@
 
-#! /bin/bash -ex
+#!/bin/bash 
 
 echo "-------------- Cap nhat he thong ------------------"
    apt-get update && apt-get -y dist-upgrade 
