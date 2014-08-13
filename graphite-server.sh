@@ -4,40 +4,6 @@
 echo "-------------- Cap nhat he thong ------------------"
    apt-get update && apt-get -y dist-upgrade 
    apt-get -y upgrade && apt-get -f install
-echo "----------------------------------------------------"
-
-echo "-------Cau hinh dia chi ip va hostname---------------"
-
-iface=/etc/network/interface
-
-test -f $ifaces.orig || cp $ifaces $ifaces.orig
-rm $ifaces
-touch  $iface
-
-cat <<EOF >>$iface
-
-  # The loopback network interface
- auto lo
- iface lo inet loopback
-
-  # The primary network interface
-
-  auto eth0				      
-  iface eth0 inet static 	
-  address  172.16.1.78  	  
-  netmask  255.255.255.0  
-  gateway  172.16.69.1     
-  dns-nameservers 8.8.8.8 
-EOF
-
-/etc/init.d/networking restart
-sleep 3
-
-echo "------------------------------------------------------"
-
-echo "---- Khai bao hostname -------------------------------"
-echo "   SERVER   "  	>/etc/hostname 
-echo "-------------------------------------------------------"
 
 echo "-----------------Install system-------------------------"
 
