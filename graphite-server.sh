@@ -8,8 +8,9 @@ echo "----------------------------------------------------"
 
 echo "-------Cau hinh dia chi ip va hostname---------------"
 
+iface=/etc/network/interface
 
-cat << EOF >> /etc/network/interface
+cat << EOF >>$iface
   auto eth0				      
   iface eth0 inet static 	
   address  172.16.1.78  	  
@@ -17,103 +18,100 @@ cat << EOF >> /etc/network/interface
   gateway  172.16.69.1     
   dns-nameservers 8.8.8.8 
 EOF
+
 /etc/init.d/networking restart
+sleep 3
 
 echo "------------------------------------------------------"
 
 echo "---- Khai bao hostname -------------------------------"
-echo "    graphite-server" 			>/etc/hostname 
+echo "   SERVER   "  	>/etc/hostname 
 echo "-------------------------------------------------------"
 
 echo "-----------------Install system-------------------------"
 
-  apt-get install -y graphite-web graphite-carbon
-  apt-get update
+apt-get install -y graphite-web graphite-carbon
+apt-get update
 echo "--------------------------------------------------------"
 
 echo "--------------------Cai dat PostgreSQL-------------------"
  
-    apt-get install -y  postgresql libpq-dev python-psycopg2
+apt-get install -y  postgresql libpq-dev python-psycopg2
 echo "---------Create a Database User and a Database------------"
-    sudo -u postgres psql
-    CREATE USER graphite WITH PASSWORD 'Admin123';
-    CREATE DATABASE graphite WITH OWNER graphite;
-    \q
- echo " ------------------------------------------------------------"
+sudo -u postgres psql
+CREATE USER graphite WITH PASSWORD 'Admin123';
+CREATE DATABASE graphite WITH OWNER graphite;
+\q
+echo " ------------------------------------------------------------"
 
- echo "------------------Cau hinh graphite web-app-----------------"
-  
-cp /etc/graphite/local_settings.py /etc/graphite/local_settings.py.bka
+echo "------------------Cau hinh graphite web-app-----------------"
 
- echo "SECRET_KEY = 'a_salty_string' " 			     >> /etc/graphite/local_settings.py 
- echo "TIME_ZONE = 'Asia/Ho_Chi_Minh' "  		     >> /etc/graphite/local_settings.py
- echo "USE_REMOTE_USER_AUTHENTICATION = True" 	 >> /etc/graphite/local_settings.py
+$local=/etc/graphite/local_settings.py
 
- echo  <<EOF >  /etc/graphite/local_settings.py 
-  DATABASES = {
-    'default': {
-        'NAME': 'graphite',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'USER': 'graphite',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
-        'PORT': ''
+test -f $local.bka || cp $local $local.bka
+
+rm $local
+
+touch $local
+#---------------------------------------------------------------------------------- 
+cat  <<EOF  >>$local
+SECRET_KEY = 'a_salty_string'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
+LOG_RENDERING_PERFORMANCE = True
+LOG_CACHE_PERFORMANCE = True
+LOG_METRIC_ACCESS = True
+GRAPHITE_ROOT = '/usr/share/graphite-web'
+CONF_DIR = '/etc/graphite'
+STORAGE_DIR = '/var/lib/graphite/whisper'
+CONTENT_DIR = '/usr/share/graphite-web/static'
+WHISPER_DIR = '/var/lib/graphite/whisper'
+LOG_DIR = '/var/log/graphite'
+INDEX_FILE = '/var/lib/graphite/search_index'  # Search index file
+USE_REMOTE_USER_AUTHENTICATION = True
+DATABASES = {
+'default': {
+'NAME': 'graphite',
+'ENGINE': 'django.db.backends.postgresql_psycopg2',
+'USER': 'graphite',
+'PASSWORD': 'Admin123',
+'HOST': '127.0.0.1',
+'PORT': ''
     }
+  }
 
-}
 EOF
+sleep 3
+#-------------------------------------------------------------------------
 echo "------ Dong bo du lieu----------------------------------------"
-
-     sudo graphite-manage syncdb
-     sleep 3
-
+sudo graphite-manage syncdb
+sleep 3
 echo "----------------Carbon configure-----------------------------"
-
-      sed -i 's/false/true/g'  /etc/default/graphite-carbon
-      sleep 3
-
-      sed -i 's/false/true/g'  /etc/carbon/carbon.conf
+sed -i 's/false/true/g'  /etc/default/graphite-carbon
+sleep 3
+sed -i 's/false/true/g'  /etc/carbon/carbon.conf
 echo "---------------Configure Storage------------------------------"
-      sudo cp /usr/share/doc/graphite-carbon/examples/storage-aggregation.conf.example /etc/carbon/storage-aggregation.conf
-      sleep 3
+sudo cp /usr/share/doc/graphite-carbon/examples/storage-aggregation.conf.example /etc/carbon/storage-aggregation.conf
+sleep 3
+echo "---Khoi dong lai dich vu carbon-cache-------------------------"
+sudo service carbon-cache start
+echo "------------------------------------------------------------------------------"
 
- echo "---Khoi dong lai dich vu carbon-cache-------------------------"
-       sudo service carbon-cache start
-
- echo "------------------------------------------------------------------------------"
-
- echo "-------------------Install and configure Apache2--------------------------------"
-    
-        sudo apt-get  -y install apache2 libapache2-mod-wsgi
-        sudo apt-get update
-  #--------------------------------------------------------------------------------------
-        sudo a2dissite 000-default
-  #--------------------------------------------------------------------------------------
-        sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
-   #-----------------------------------------------------------------------------------
-        sudo a2ensite apache2-graphite
-   #--------------------------------------------------------- ------------------------- 
-  echo "-----------khoi dong lai dich vu Apache2--------------------------------------"
-        sudo service apache2 reload
-  #------------------------------------------------------------------------------------"
-  echo " truy cap vao tai khoan http://172.16.69.71 ( ip server) "
-
-
-  echo "--Cai dat va cau hinh Collectd tren may server-----------------------------"
-
-      apt-get update
-      apt-get install  -y collectd collectd-utils
-  echo "------------------------------------------------------------------------------"
-  echo "---=---Configure collectd----=------------"
-  echo "Hostname $hostname"     >> /etc/collectd/collectd.conf
-
-  echo " LoadPlugin network"    >> /etc/collectd/collectd.conf
-  echo " LoadPlugin write_graphite"
-  echo " <Plugin network>"      >>/etc/collectd/collectd.conf
-  echo " Listen "*" "2003""     >>/etc/collectd/collectd.conf
-  echo "  </Plugin>"              >>/etc/collectd/collectd.conf
-  
-
-  echo " ---=-Khoi dong lai dich vu--=--------------"
-   service  collectd restart
- echo "-----------------------------------------------"
+echo "-------------------Install and configure Apache2--------------------------------"
+sudo apt-get  -y install apache2 libapache2-mod-wsgi
+sudo apt-get update
+#--------------------------------------------------------------------------------------
+sudo a2dissite 000-default
+#--------------------------------------------------------------------------------------
+sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
+#-----------------------------------------------------------------------------------
+sudo a2ensite apache2-graphite
+#--------------------------------------------------------- ------------------------- 
+echo "-----------khoi dong lai dich vu Apache2--------------------------------------"
+sudo service apache2 reload
+#------------------------------------------------------------------------------------"
+echo " truy cap vao tai khoan http://172.16.69.71 ( ip server) "
+echo "--Cai dat va cau hinh Collectd tren may server-----------------------------"
+apt-get update
+apt-get install  -y collectd collectd-utils
+echo "------------------------------------------------------------------------------"
+ 
