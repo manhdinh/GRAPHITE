@@ -1,20 +1,27 @@
 #!/bin/bash
 
+
+
+echo"---------install git-----------------------"
+     apt-get install git -y
+     sleep 3
+
+ #-------------------------------------------------
 echo "-----install collectd-client------------"
     apt-get install collectd libjson-perl -y
 
 echo "----=--Configure collectd -client--=------"
  
-  collectd= /etc/collectd/collectd.conf
+  file-collectd=/etc/collectd/collectd.conf
  #-------------------------------------------------------
-  test -f $collectd.bka || cp $collectd $collectd.bka
+ test -f $file-collectd.bka || cp $file-collectd $file-collectd.bka
    #-------------------------------------------------------- 
-  rm $collectd
+  rm $file-collectd
 
   #-----------------Tao file moi rong-----------------------------------------
-   touch $collectd
+   touch $file-collectd
   #---------------------------------------------------------------------------
-  echo <<EOF > $collectd
+  echo <<EOF > $file-collectd
     
     FQDNLookup true
 	Interval 10
@@ -53,7 +60,7 @@ echo "----=--Configure collectd -client--=------"
 	Include "/etc/collectd/thresholds.conf"
 EOF
 #------------------------------------------------------------------------
-   service collectd restart
+service collectd restart
 
 #-----------------------------------------------------------------------
 
