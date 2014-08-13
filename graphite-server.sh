@@ -23,16 +23,9 @@ EOF
 echo " ------------------------------------------------------------"
 
 echo "------------------Cau hinh graphite web-app-----------------"
-
-$local=/etc/graphite/local_settings.py
-
-test -f $local.bka || cp $local $local.bka
-
-rm $local
-
-touch $local
+cp /etc/graphite/local_settings.py /etc/graphite/local_settings.py.bka    
 #---------------------------------------------------------------------------------- 
-cat  <<EOF  >>$local
+cat  <<EOF  >> /etc/graphite/local_settings.py 
 SECRET_KEY = 'a_salty_string'
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
 LOG_RENDERING_PERFORMANCE = True
