@@ -23,7 +23,11 @@ EOF
 echo " ------------------------------------------------------------"
 
 echo "------------------Cau hinh graphite web-app-----------------"
-cp /etc/graphite/local_settings.py /etc/graphite/local_settings.py.bka    
+cp /etc/graphite/local_settings.py /etc/graphite/local_settings.py.bka 
+
+rm /etc/graphite/local_settings.py   
+
+touch /etc/graphite/local_settings.py
 #---------------------------------------------------------------------------------- 
 cat  <<EOF  >> /etc/graphite/local_settings.py 
 SECRET_KEY = 'a_salty_string'
