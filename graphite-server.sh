@@ -10,7 +10,11 @@ echo "-------Cau hinh dia chi ip va hostname---------------"
 
 iface=/etc/network/interface
 
-cat << EOF >>$iface
+test -f $ifaces.orig || cp $ifaces $ifaces.orig
+rm $ifaces
+touch  $iface
+
+cat <<EOF >$iface
   auto eth0				      
   iface eth0 inet static 	
   address  172.16.1.78  	  
@@ -19,7 +23,7 @@ cat << EOF >>$iface
   dns-nameservers 8.8.8.8 
 EOF
 
-/etc/init.d/networking restart
+/etc/init.d
 sleep 3
 
 echo "------------------------------------------------------"
