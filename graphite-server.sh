@@ -38,10 +38,11 @@ echo "--------------------Cai dat PostgreSQL-------------------"
  
 apt-get install -y  postgresql libpq-dev python-psycopg2
 echo "---------Create a Database User and a Database------------"
-sudo -u postgres psql
-CREATE USER graphite WITH PASSWORD 'Admin123';
-CREATE DATABASE graphite WITH OWNER graphite;
+cat << EOF |sudo -u postgres psql
+  CREATE USER graphite WITH PASSWORD 'Admin123';
+  CREATE DATABASE graphite WITH OWNER graphite;
 \q
+EOF
 echo " ------------------------------------------------------------"
 
 echo "------------------Cau hinh graphite web-app-----------------"
