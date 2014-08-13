@@ -53,7 +53,7 @@ echo "----=--Configure collectd -client--=------"
 	Include "/etc/collectd/thresholds.conf"
 EOF
 #------------------------------------------------------------------------
-service collectd restart
+   service collectd restart
 
 #-----------------------------------------------------------------------
 
