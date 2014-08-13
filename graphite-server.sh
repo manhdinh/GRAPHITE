@@ -8,7 +8,7 @@ echo "-------------- Cap nhat he thong ------------------"
 echo "-----------------Install system-------------------------"
 
 apt-get install -y graphite-web graphite-carbon
-apt-get update
+
 echo "--------------------------------------------------------"
 
 echo "--------------------Cai dat PostgreSQL-------------------"
