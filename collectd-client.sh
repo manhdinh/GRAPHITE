@@ -44,7 +44,6 @@ LoadPlugin swap
 LoadPlugin users
 <Plugin interface>
   Interface "eth0"
-  Interface "eth1"
   IgnoreSelected false
 </Plugin>
 <Plugin network>
