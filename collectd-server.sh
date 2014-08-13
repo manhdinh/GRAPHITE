@@ -1,5 +1,7 @@
 #! /bin/bash
 
+eth0_address=`/sbin/ifconfig eth0 | awk '/inet addr/ {print $2}' | cut -f2 -d ":" `
+
 
 echo "--Cai dat va cau hinh Collectd tren may server-----------------------------"
 apt-get update
@@ -12,7 +14,7 @@ test -f $filecollectd.bka || cp $filecollectd $filecollectd.bka
 rm $filecollectd
 
 cat << EOF >>$filecollectd
-Hostname "SERVER"
+Hostname "Server"
 FQDNLookup true
 Interval 10
 ReadThreads 5
@@ -37,7 +39,7 @@ LoadPlugin users
 LoadPlugin write_graphite
 <Plugin apache>
    <Instance "Graphite">
-        URL "http://172.16.69.204/server-status?auto"
+        URL "http://$eth0_address/server-status?auto"
       Server "apache"
 </Instance>
 </Plugin>

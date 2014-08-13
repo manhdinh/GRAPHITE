@@ -48,7 +48,7 @@ LoadPlugin users
 </Plugin>
 <Plugin network>
     # client setup:
-   Server "172.16.69.204" "2003"
+   Server "172.16.69.71" "2003"
 </Plugin>
 <Plugin rrdtool>
     DataDir "/var/lib/collectd/rrd"
