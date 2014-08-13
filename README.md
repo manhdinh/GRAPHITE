@@ -26,12 +26,12 @@ Graphite.
    
    
     a.Collectd:
-	   - Thu thập thông tin  thống  kê về các thành phần của máy chủ như : Ram,CPU,network theo thời gian thực
-	   - thu thập các thông tin tù các ứng dụng : Apache,Nginx,iptable,memcache,...
+	- Thu thập thông tin  thống  kê về các thành phần của máy chủ như : Ram,CPU,network theo thời gian thực
+	- thu thập các thông tin tù các ứng dụng : Apache,Nginx,iptable,memcache,...
 	   
-	   =:Cug cấp các thông tin trước khi tạo các ứng dụng trên máy chủ
+	- Cug cấp các thông tin trước khi tạo các ứng dụng trên máy chủ
 	   
-	 b,StatD:
+     b,StatD:
         - thu tập thông tin thông qua các cổng chạy trên  giao thức UDP => tổng hợp -> đưa lên Graphite.
 
 
@@ -100,14 +100,13 @@ Graphite.
 	CARBON_CACHE_ENABLED=true
 
         ```		
-<<<<<<< HEAD
-		- sửa file :
- 		```
-		sudo nano /etc/carbon/carbon.conf
-        ```
-	    ```
-		 ENABLE_LOGROTATION = True
-		```
+	- sửa file :
+ 	```
+	sudo nano /etc/carbon/carbon.conf
+```
+```
+ ENABLE_LOGROTATION = True
+```
 =======
 	- sửa file : 
 	```
@@ -118,7 +117,6 @@ Graphite.
 	  ENABLE_LOGROTATION = True
 
         ```
->>>>>>> origin/master
         - Cài đặt và cấu hình Apache:
 		
 	 ```
@@ -140,13 +138,14 @@ Graphite.
 
 	 ```
         - Khởi động lại dịch vụ Apache:
-		 ```
-		  sudo service apache2 reload
+	```
+	sudo service apache2 reload
 
-		 ```
-	- Truy cập vào : ```
-	                  http://server_domain_name_or_IP
-	                 ```
+	```
+   - Truy cập vào :
+   ```
+    http://server_domain_name_or_IP
+    ```
 	sẽ được giao diện như dưới :
 	 <img src="http://i.imgur.com/6eUgKnM.png">
 	- Chọn tab graphite :
