@@ -8,13 +8,15 @@ echo "----------------------------------------------------"
 
 echo "-------Cau hinh dia chi ip va hostname---------------"
 
-echo "auto eth0" 					      >> /etc/network/interface
-echo "iface eth0 inet static" 	>> /etc/network/interface
-echo "address  192.168.1.71"  	>> /etc/network/interface
-echo "netmask  255.255.255.0"   >> /etc/network/interface
-echo "gateway  192.168.1.1"     >> /etc/network/interface
-echo "dns-nameservers 8.8.8.8"  >> /etc/network/interface
 
+cat << EOF >> /etc/network/interface
+  auto eth0				      
+  iface eth0 inet static 	
+  address  172.16.1.78  	  
+  netmask  255.255.255.0  
+  gateway  172.16.69.1     
+  dns-nameservers 8.8.8.8 
+EOF
 /etc/init.d/networking restart
 
 echo "------------------------------------------------------"
@@ -41,7 +43,7 @@ echo "---------Create a Database User and a Database------------"
 
  echo "------------------Cau hinh graphite web-app-----------------"
   
-  cp /etc/graphite/local_settings.py /etc/graphite/local_settings.py.bka
+cp /etc/graphite/local_settings.py /etc/graphite/local_settings.py.bka
 
  echo "SECRET_KEY = 'a_salty_string' " 			     >> /etc/graphite/local_settings.py 
  echo "TIME_ZONE = 'Asia/Ho_Chi_Minh' "  		     >> /etc/graphite/local_settings.py

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-
+apt-get update && apt-get -y dist-upgrade && apt-get upgrade -y
 echo "---------install git-----------------------"
 apt-get install git -y
 sleep 3
