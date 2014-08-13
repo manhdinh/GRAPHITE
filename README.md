@@ -104,13 +104,12 @@ I. Tìm hiểu về graphite
 		CARBON_CACHE_ENABLED=true
 
         ```		
-		- sửa file : ```
-		             sudo nano /etc/carbon/carbon.conf
-
-		             ```
+		- sửa file :
+ 		```
+		sudo nano /etc/carbon/carbon.conf
+        ```
 	    ```
 		 ENABLE_LOGROTATION = True
-
 		```
         - Cài đặt và cấu hình Apache:
 		
