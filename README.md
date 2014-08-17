@@ -77,41 +77,40 @@ II. Cài đặt và sử dụng :
 	sudo graphite-manage syncdb
 
   ```
-	* Cấu hình Carbon:
+* Cấu hình Carbon:
         
-	- bật dịch vụ carbon :
-	```
-	sudo nano /etc/default/graphite-carbon
+- bật dịch vụ carbon :
+```
+sudo nano /etc/default/graphite-carbon
          
-	CARBON_CACHE_ENABLED=true
+CARBON_CACHE_ENABLED=true
 
-  ```		
-  - sửa file :
-	```
-	sudo nano /etc/carbon/carbon.conf
-	```
-	ENABLE_LOGROTATION = True
+```		
+- sửa file :
+```
+sudo nano /etc/carbon/carbon.conf
+```
+ENABLE_LOGROTATION = True
 
-	```  
-  - Cài đặt và cấu hình Apache:
-	```
-	sudo apt-get install -y apache2 libapache2-mod-wsgi
-
-	```
-	- tắt dịch vụ host ảo :
-	```
-	sudo a2dissite 000-default
-	```
-	- Next, copy the Graphite Apache virtual host file into the available sites directory:
-  ```
+```  
+- Cài đặt và cấu hình Apache:
+```
+sudo apt-get install -y apache2 libapache2-mod-wsgi
+```
+- tắt dịch vụ host ảo :
+```
+sudo a2dissite 000-default
+```
+- Next, copy the Graphite Apache virtual host file into the available sites directory:
+```
 	sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
-  ```
-  - Enable host ảo:
-  ```
+```
+- Enable host ảo:
+```
 	sudo a2ensite apache2-graphite
 
-  ```
-  - Khởi động lại dịch vụ Apache:
+ ```
+ - Khởi động lại dịch vụ Apache:
 	```
 	sudo service apache2 reload
   ```
@@ -153,7 +152,7 @@ II. Cài đặt và sử dụng :
 			LoadPlugin write_graphite
 
 ----------------------------------------------------------------------
-			<Plugin apache>
+<Plugin apache>
     <Instance "Graphite">
         URL "http://172.16.69.204/server-status?auto"
         Server "apache"
@@ -241,7 +240,7 @@ LoadPlugin syslog
 <Plugin syslog>
     LogLevel info
 </Plugin>
-#LoadPlugin battery
+LoadPlugin battery
 LoadPlugin cpu
 LoadPlugin df
 LoadPlugin disk
