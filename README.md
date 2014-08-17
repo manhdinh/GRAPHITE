@@ -114,28 +114,25 @@ sudo a2dissite 000-default
 	```
 	sudo service apache2 reload
   ```
-	- Truy cập vào : 
-	```
-	http://server_domain_name_or_IP
-	```
-	sẽ được giao diện như dưới :
-	<img src="http://i.imgur.com/6eUgKnM.png">
-	- Chọn tab graphite :
-  <img src="http://i.imgur.com/YooahDo.png">	
-	      
-	III. Cài đặt  collectd:
-	 - Cài collectd và các gói hỗ trợ:
-	```
-	 sudo apt-get install collectd collectd-utils -y 
-  ```  
+- Truy cập vào : 
+```
+http://server_domain_name_or_IP
+```
+sẽ được giao diện như dưới :
+<img src="http://i.imgur.com/6eUgKnM.png">
+- Chọn tab graphite :
+ <img src="http://i.imgur.com/YooahDo.png">	
+III. Cài đặt  collectd:
+- Cài collectd và các gói hỗ trợ:
+```
+	sudo apt-get install collectd collectd-utils -y 
+```  
+- Sửa cấu hình trong collectd :
 
-	- Sửa cấu hình trong collectd :
-
-	sudo nano /etc/collectd/collectd.conf
-  ```   
-  Hostname "u14-monitor"
-  ```
-
+sudo nano /etc/collectd/collectd.conf
+```   
+ Hostname "u14-monitor"
+```
  - Chỉnh để hiển thị các  plugin:
 ``` 
 --------------------------------------------------------------------------     
