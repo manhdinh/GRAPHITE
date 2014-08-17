@@ -31,6 +31,8 @@ b,StatD:
 II. Cài đặt và sử dụng : 
  Mô hình : 
   <img src="http://i.imgur.com/IuEMiwO.png"></br>
+  
+  
 1. Cài đặt Graphite :
  
  * Cập nhập Os và cài các gói:
