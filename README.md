@@ -110,8 +110,8 @@ ENABLE_LOGROTATION = True
 ```
 sudo apt-get install -y apache2 libapache2-mod-wsgi
 ```
+
 - tắt dịch vụ host ảo :
-- 
 ```
 sudo a2dissite 000-default
 ```
