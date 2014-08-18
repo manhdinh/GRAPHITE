@@ -284,3 +284,8 @@ Include "/etc/collectd/filters.conf"
 Include "/etc/collectd/thresholds.conf"
 ```
 Kết thúc quá trình cài đặt và cấu hình Graphite 
+
+#### IV .Các tài liệu tham khảo: 
+
+- https://www.digitalocean.com/community/tutorials/how-to-install-and-use-graphite-on-an-ubuntu-14-04-server
+- https://www.digitalocean.com/community/tutorials/how-to-configure-collectd-to-gather-system-metrics-for-graphite-on-ubuntu-14-04
