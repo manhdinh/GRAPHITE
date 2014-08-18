@@ -14,20 +14,20 @@ chmod +x *.sh
 ```
 ###### 3. Chạy  các file script :
 ####### 3.1.  Trên server ::
-######## 3.1.1:
+######## 3.1.1: cài đặt Graphite
 ``` 
    bash graphite-server.sh
 ```
-####### 3.1.2:
+####### 3.1.2: Cài đặt collectd
 ```
 bash collectd-server.sh
 ```
-#####3.2. Trên Client chạy file collectd :
+##### 3.2. Trên Client chạy file collectd :
   
 ```
 bash collectd.sh
 ```
-##### 4. Hoàn thành :
+###### 4. Hoàn thành :
  Truy cập vào  đỉa chỉ:
  ```
   http://ip_server
