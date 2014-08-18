@@ -1,10 +1,11 @@
 =================================
-###I. Tìm hiểu về graphite
-#####1. Graphite : 
-   - là 1 ứng dụng thu thập, lưu trữ và hiển thị thông tin máy chủ và các ứng dụng.
-   - thư viện đồ họa nhiêu thành phần sử dụng để  hiển thị thông số hình ảnh theo thời gian thực
+
+### I. Tìm hiểu về graphite
+##### 1. Graphite : 
+- là 1 ứng dụng thu thập, lưu trữ và hiển thị thông tin máy chủ và các ứng dụng.
+- thư viện đồ họa nhiêu thành phần sử dụng để  hiển thị thông số hình ảnh theo thời gian thực
    
-#####2.Các thành phần
+##### 2.Các thành phần
 ###### Graphite-webapp:
 - thiết kế các biểu đồ dữ liệu.
 - Cung câp giao diện đồ họa  để hiển thị các thông số từ máy chủ và ứng dụng.
@@ -36,17 +37,19 @@ b,StatD:
 #### 1. Cài đặt Graphite :
  
 ##### * Cập nhập Os và cài các gói:
+
 ```
 sudo apt-get update
 sudo apt-get install graphite-web graphite-carbon
+
 ``` 
 ##### * Cấu hình  CSDL với Django:
 - cài PostgreSQL:
+
 ```
 sudo apt-get install postgresql libpq-dev python-psycopg2
 ```		
--Create a Database User and a Database:
-
+- Create a Database User and a Database:
 ```
 sudo -u postgres psql
 CREATE USER graphite WITH PASSWORD 'password';
@@ -88,13 +91,13 @@ sudo nano /etc/default/graphite-carbon
 CARBON_CACHE_ENABLED=true
 ```		
 - sửa file :
-```
 sudo nano /etc/carbon/carbon.conf
 
 ```
 ENABLE_LOGROTATION = True
 ```  
 - Cài đặt và cấu hình Apache:
+
 ```
 sudo apt-get install -y apache2 libapache2-mod-wsgi
 ```
@@ -119,92 +122,89 @@ sudo service apache2 reload
 ```
 http://server_domain_name_or_IP
 ```
-
 sẽ được giao diện như dưới :
+
 <img src="http://i.imgur.com/6eUgKnM.png">
+
 - Chọn tab graphite :
-- 
+
  <img src="http://i.imgur.com/YooahDo.png">	
 
 ### III Cài đặt  collectd:
+
 - Cài collectd và các gói hỗ trợ:
+
 ```
-	sudo apt-get install collectd collectd-utils -y 
+sudo apt-get install collectd collectd-utils -y 
 ```  
 - Sửa cấu hình trong collectd :
 
 sudo nano /etc/collectd/collectd.conf
 
-```   
- Hostname "u14-monitor"
-```
  - Chỉnh để hiển thị các  plugin:
 
 ``` 
---------------------------------------------------------------------------     
-      LoadPlugin apache
-			LoadPlugin cpu
-			LoadPlugin df
-			LoadPlugin entropy
-			LoadPlugin interface
-			LoadPlugin load
-			LoadPlugin memory
-			LoadPlugin processes
-			LoadPlugin rrdtool
-			LoadPlugin users
-			LoadPlugin write_graphite
+LoadPlugin apache
+LoadPlugin cpu
+LoadPlugin df
+LoadPlugin entropy
+LoadPlugin interface
+LoadPlugin load
+LoadPlugin memory
+LoadPlugin processes
+LoadPlugin rrdtool
+LoadPlugin users
+LoadPlugin write_graphite
 
 ----------------------------------------------------------------------
 <Plugin apache>
-    <Instance "Graphite">
-        URL "http://172.16.69.204/server-status?auto"
-        Server "apache"
-    </Instance>
-  </Plugin>
+<Instance "Graphite">
+URL "http://172.16.69.204/server-status?auto"
+Server "apache"
+</Instance>
+ </Plugin>
 --------------------------------------------------------------------
-   <Plugin df>
-    Device "/dev/sda"
-    MountPoint "/"
-    FSType "ext4"
-  </Plugin>
+ <Plugin df>
+Device "/dev/sda"
+MountPoint "/"
+FSType "ext4"
+</Plugin>
 ------------------------------------------------------------------
-  <Plugin interface>
-    Interface "eth1"
-    IgnoreSelected false
+
+ <Plugin interface>
+Interface "eth1"
+IgnoreSelected false
 </Plugin>
 
 -----------------------------------------------------------
- <Plugin write_graphite>
-    <Node "graphing">
-        Host "localhost"
-        Port "2003"
-        Protocol "tcp"
-        LogSendErrors true
-        Prefix "collectd."
-        StoreRates true
-        AlwaysAppendDS false
-        EscapeCharacter "_"
-    </Node>
+<Plugin write_graphite>
+<Node "graphing">
+Host "localhost"
+Port "2003"
+Protocol "tcp"
+LogSendErrors true
+Prefix "collectd."
+StoreRates true
+AlwaysAppendDS false
+EscapeCharacter "_"
+</Node>
 </Plugin>
 -------------------------------------------------------------------------
 <Plugin network>
 	 Listen "*" "2003"
 </Plugin>
-------------------------------------------------------------------------------
 ```
-
-
 - Cấu hình host apache :
-
+```
 sudo nano /etc/apache2/sites-available/apache2-graphite.conf
 
-
+```
 ```
 <Location "/server-status">
         SetHandler server-status
         Require all granted
     </Location>
-``
+```
 
 - Khởi động lại dịch vụ: 
 
@@ -217,20 +217,21 @@ sudo service apache2 reload
 ```
 sudo nano /etc/carbon/storage-schemas.conf
 ```
+
 ```
 [collectd]
 pattern = ^collectd.*
 retentions = 10s:1d,1m:7d,10m:1y
 ```
+
 ```
-------------------------------------------------------------------
 sudo service carbon-cache stop          ## wait a few seconds here
 sudo service carbon-cache start
 
------------------------------------------------
+
 sudo service collectd stop
 sudo service collectd start
---------------------------------------------------------------
+
 ```
 
 2. Cài đặt  trên client : 
@@ -282,5 +283,3 @@ LoadPlugin users
 Include "/etc/collectd/filters.conf"
 Include "/etc/collectd/thresholds.conf"
 ```
- 
----------------------------------------------------------------------------------------
