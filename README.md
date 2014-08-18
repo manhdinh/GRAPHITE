@@ -193,17 +193,18 @@ sudo nano /etc/collectd/collectd.conf
 ------------------------------------------------------------------------------
 ```
 
+
 - Cấu hình host apache :
 
 sudo nano /etc/apache2/sites-available/apache2-graphite.conf
+
 
 ```
 <Location "/server-status">
         SetHandler server-status
         Require all granted
     </Location>
-```
---------------------------------------------------------------------------
+``
 
 - Khởi động lại dịch vụ: 
 
@@ -222,7 +223,7 @@ pattern = ^collectd.*
 retentions = 10s:1d,1m:7d,10m:1y
 ```
 ```
--------------------------------------------
+------------------------------------------------------------------
 sudo service carbon-cache stop          ## wait a few seconds here
 sudo service carbon-cache start
 
@@ -232,7 +233,7 @@ sudo service collectd start
 --------------------------------------------------------------
 ```
 
-2 .Cài đặt  trên client : 
+2. Cài đặt  trên client : 
 
 ```
 -----------------
