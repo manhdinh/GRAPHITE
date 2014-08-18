@@ -32,7 +32,7 @@ b,StatD:
 
 ### II. Cài đặt và sử dụng : 
 #### Mô hình : 
-  <img src="http://i.imgur.com/IuEMiwO.png"></br>
+  <img src="http://i.imgur.com/EenjRqY.png"></br>
   
 #### 1. Cài đặt Graphite :
  
