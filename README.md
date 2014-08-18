@@ -234,7 +234,7 @@ sudo service collectd start
 
 ```
 
-2. Cài đặt  trên client : 
+#### III. Cài đặt  trên client : 
 
 ```
 -----------------
