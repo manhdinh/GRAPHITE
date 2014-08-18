@@ -2,31 +2,32 @@
 
 ##### I. Hướng dẫn : 
 1. Tải các gói script từ git:
+
 ```
  git clone https://github.com/vdcit/GRAPHITE
 ```
 2. Di chuyển vào thư mục GRAPHITE và cấp quyền :
-```
-  cd GRAPHITE
-  chmod +x *.sh 
-```
-3. Chạy  các file script :
 
-3.1.  Trên server ::
- 3.1.1:
- ``` 
+```
+cd GRAPHITE
+chmod +x *.sh 
+```
+###### 3. Chạy  các file script :
+####### 3.1.  Trên server ::
+######## 3.1.1:
+``` 
    bash graphite-server.sh
- ```
- 3.1.2:
-  ```
-   bash collectd-server.sh
-  ```
- 3.2. Trên Client chạy file collectd :
- 
- ```
-   bash collectd.sh
- ```
-4. Hoàn thành :
+```
+####### 3.1.2:
+```
+bash collectd-server.sh
+```
+#####3.2. Trên Client chạy file collectd :
+  
+```
+bash collectd.sh
+```
+##### 4. Hoàn thành :
  Truy cập vào  đỉa chỉ:
  ```
   http://ip_server
