@@ -33,10 +33,19 @@ b,StatD:
 ### II. Cài đặt và sử dụng : 
 #### Mô hình : 
   <img src="http://i.imgur.com/EenjRqY.png"></br>
-  
+ 
+
+#### Chuẩn bị cài đặt:
+ 
+- Server : Cài đặt trên các máy ubuntu server 14.04 
+- ip : 172.16.69.71/24
+
+- Client : Tiến hành trên Ubuntu server 14.04 </br>
+- ip  : 172.16.69.73/24</br>
+
 #### 1. Cài đặt Graphite :
  
-##### * Cập nhập Os và cài các gói:
+##### * Cập nhập OS và cài các gói:
 
 ```
 sudo apt-get update
