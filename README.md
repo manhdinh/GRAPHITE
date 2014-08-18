@@ -283,3 +283,6 @@ LoadPlugin users
 Include "/etc/collectd/filters.conf"
 Include "/etc/collectd/thresholds.conf"
 ```
+#-----------------------------------------------------------------------------------
+
+Kết thúc quá trình cài đặt và cấu hình Graphite 
