@@ -1,10 +1,10 @@
 =================================
 ###I. Tìm hiểu về graphite
- #####1. Graphite : 
+#####1. Graphite : 
    - là 1 ứng dụng thu thập, lưu trữ và hiển thị thông tin máy chủ và các ứng dụng.
    - thư viện đồ họa nhiêu thành phần sử dụng để  hiển thị thông số hình ảnh theo thời gian thực
-#####2.Các thành phần
    
+#####2.Các thành phần
 * Graphite-webapp:
 - thiết kế các biểu đồ dữ liệu.
 - Cung câp giao diện đồ họa  để hiển thị các thông số từ máy chủ và ứng dụng.
