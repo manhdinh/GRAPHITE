@@ -80,7 +80,7 @@ CREATE DATABASE graphite WITH OWNER graphite;
 ```
 sudo nano /etc/graphite/local_settings.py
 ```
-- sửa file:
+- Sửa file:
 
 ```
 SECRET_KEY = 'a_salty_string'
@@ -104,13 +104,13 @@ sudo graphite-manage syncdb
 ```
 ##### * Cấu hình Carbon:
         
-- bật dịch vụ carbon 
+- Bật dịch vụ carbon 
 
 ```
 sudo nano /etc/default/graphite-carbon
 CARBON_CACHE_ENABLED=true
 ```		
-- sửa file :
+- Sửa file :
 sudo nano /etc/carbon/carbon.conf
 
 ```
@@ -122,7 +122,7 @@ ENABLE_LOGROTATION = True
 sudo apt-get install -y apache2 libapache2-mod-wsgi
 ```
 
-- tắt dịch vụ host ảo :
+- Tắt dịch vụ host ảo :
 ```
 sudo a2dissite 000-default
 ```
@@ -161,7 +161,7 @@ sudo apt-get install collectd collectd-utils -y
 
 sudo nano /etc/collectd/collectd.conf
 
- - Chỉnh để hiển thị các  plugin:
+- Chỉnh để hiển thị các  plugin:
 
 ``` 
 LoadPlugin apache
