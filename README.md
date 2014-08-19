@@ -23,11 +23,12 @@
 ##### 3. Các thành phần làm việc :
 - Graphite chỉ thống kê thông tin dữ liệu dựa vào 2 thành phần là StatD,Collectd.
 
-a.Collectd:
+3.1.Collectd:
 - Thu thập thông tin  thống  kê về các thành phần của máy chủ như : Ram,CPU,network theo thời gian thực
 - Thu thập các thông tin tù các ứng dụng : Apache,Nginx,iptable,memcache,...
 - Cug cấp các thông tin trước khi tạo các ứng dụng trên máy chủ  
-b,StatD:
+
+3.2.StatD:
 - Thu tập thông tin thông qua các cổng chạy trên  giao thức UDP => tổng hợp -> đưa lên Graphite.
 
 ### II. Cài đặt và sử dụng : 
