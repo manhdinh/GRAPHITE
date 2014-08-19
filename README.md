@@ -2,46 +2,56 @@
 
 ### I. Tìm hiểu về graphite
 ##### 1. Graphite : 
-- là 1 ứng dụng thu thập, lưu trữ và hiển thị thông tin máy chủ và các ứng dụng.
-- thư viện đồ họa nhiêu thành phần sử dụng để  hiển thị thông số hình ảnh theo thời gian thực
+- Là 1 ứng dụng thu thập, lưu trữ và hiển thị thông tin máy chủ và các ứng dụng.
+- Thư viện đồ họa nhiêu thành phần sử dụng để  hiển thị thông số hình ảnh theo thời gian thực
    
 ##### 2.Các thành phần
 ###### Graphite-webapp:
-- thiết kế các biểu đồ dữ liệu.
+- Thiết kế các biểu đồ dữ liệu.
 - Cung câp giao diện đồ họa  để hiển thị các thông số từ máy chủ và ứng dụng.
 - Tạo đồ thị dựa trên dữ liệu mà nó nhận được
 => chỉ hiển thị biểu đồ không lưu trữ lại dữ liệu.
 
 ######  Carbon:
--thành phần lưu trữ dữ liệu của graphite
--Xử lý dữ liệu được gửi qua câc tiến trình khác để thu thập và truyền tải số liệu thống kê.
+- Thành phần lưu trữ dữ liệu của graphite
+- Xử lý dữ liệu được gửi qua câc tiến trình khác để thu thập và truyền tải số liệu thống kê.
 	 
 ###### Whiper:
-- là thư viện CSDL của Graphite => sử dụng lưu thông tin nhận được.
-- cung cấp nhanh và tin cậy số liệu theo thời gian thực.
+- Là thư viện CSDL của Graphite => sử dụng lưu thông tin nhận được.
+- Cung cấp nhanh và tin cậy số liệu theo thời gian thực.
 	 
 ##### 3. Các thành phần làm việc :
 - Graphite chỉ thống kê thông tin dữ liệu dựa vào 2 thành phần là StatD,Collectd.
 
 a.Collectd:
 - Thu thập thông tin  thống  kê về các thành phần của máy chủ như : Ram,CPU,network theo thời gian thực
-- thu thập các thông tin tù các ứng dụng : Apache,Nginx,iptable,memcache,...
--Cug cấp các thông tin trước khi tạo các ứng dụng trên máy chủ  
+- Thu thập các thông tin tù các ứng dụng : Apache,Nginx,iptable,memcache,...
+- Cug cấp các thông tin trước khi tạo các ứng dụng trên máy chủ  
 b,StatD:
-- thu tập thông tin thông qua các cổng chạy trên  giao thức UDP => tổng hợp -> đưa lên Graphite.
+- Thu tập thông tin thông qua các cổng chạy trên  giao thức UDP => tổng hợp -> đưa lên Graphite.
 
 ### II. Cài đặt và sử dụng : 
 #### Mô hình : 
   <img src="http://i.imgur.com/EenjRqY.png"></br>
  
-
 #### Chuẩn bị cài đặt:
  
-- Server : Cài đặt trên các máy ubuntu server 14.04 
-- ip : 172.16.69.71/24
 
-- Client : Tiến hành trên Ubuntu server 14.04 </br>
-- ip  : 172.16.69.73/24</br>
+- Server
+ 
+ - OS : Ubuntu server 14.04
+ - Ram : > 512MB
+ - HDD : 20GB
+ - CPU : 2 CPU(VTx)
+ - Ip : 172.16.69.71/24
+
+- Client
+ 
+ - OS : Ubuntu server 14.04
+ - Ram : > 512MB
+ - HDD : 20GB
+ - CPU : 2 CPU(VTx)
+ - Ip  : 172.16.69.73/24 </br>
 
 #### 1. Cài đặt Graphite :
  
