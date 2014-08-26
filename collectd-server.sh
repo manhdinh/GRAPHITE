@@ -1,7 +1,7 @@
 #! /bin/bash
 
 eth0_address=`/sbin/ifconfig eth0 | awk '/inet addr/ {print $2}' | cut -f2 -d ":" `
-read -p "nhap host" hs
+read -p "nhap host:" hs
 
 echo "--Cai dat va cau hinh Collectd tren may server-----------------------------"
 apt-get update
