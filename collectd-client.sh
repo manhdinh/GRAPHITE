@@ -9,7 +9,7 @@ sleep 3
 #-------------------------------------------------
 echo "-----install collectd-client------------"
 apt-get install collectd libjson-perl -y
-echo "----=--Configure collectd -client--=------"
+echo "------Configure collectd -client--------"
 filecollectd=/etc/collectd/collectd.conf
 #-------------------------------------------------------
 test -f $filecollectd.bka || cp $filecollectd $filecollectd.bka
