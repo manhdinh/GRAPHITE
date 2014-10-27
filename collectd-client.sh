@@ -6,13 +6,10 @@ apt-get update && apt-get -y dist-upgrade && apt-get upgrade -y
 echo "---------install git-----------------------"
 apt-get install git -y
 sleep 3
-
- #-------------------------------------------------
+#-------------------------------------------------
 echo "-----install collectd-client------------"
 apt-get install collectd libjson-perl -y
-
 echo "----=--Configure collectd -client--=------"
- 
 filecollectd=/etc/collectd/collectd.conf
 #-------------------------------------------------------
 test -f $filecollectd.bka || cp $filecollectd $filecollectd.bka
@@ -60,9 +57,7 @@ EOF
 #------------------------------------------------------------------------
 echo "Khoi dong lai collected"
 sleep 3
-
 service collectd restart
-
 #-----------------------------------------------------------------------
 
  
