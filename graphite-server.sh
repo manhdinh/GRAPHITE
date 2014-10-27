@@ -90,7 +90,7 @@ sudo a2ensite apache2-graphite
 echo "-----------khoi dong lai dich vu Apache2--------------------------------------"
 sudo service apache2 reload
 #------------------------------------------------------------------------------------"
-echo " truy cap vao tai khoan http://" $eth0_address
+echo "Truy cap vao tai khoan http://$eth0_address"
 
 #------------------------------------------------------------------------------------
 
