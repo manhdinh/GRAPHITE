@@ -1,6 +1,8 @@
 #!/bin/bash
-read -p "ip server: " ipserver
+read -p "ip server-> " ipserver
 echo $ipserver
+read -p "hostname->" hostname
+echo $hostname
 #-----------------------------------------------------------------------
 apt-get update && apt-get -y dist-upgrade && apt-get upgrade -y
 echo "---------install git-----------------------"
@@ -19,6 +21,7 @@ rm $filecollectd
 touch $filecollectd
 #---------------------------------------------------------------------------
 cat << EOF >>  $filecollectd
+Hostname $hostname
 FQDNLookup true
 Interval 10
 ReadThreads 5
