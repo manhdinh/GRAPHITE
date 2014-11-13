@@ -54,13 +54,11 @@ LoadPlugin users
 <Plugin rrdtool>
     DataDir "/var/lib/collectd/rrd"
 </Plugin>
-Include "/etc/collectd/filters.conf"
-Include "/etc/collectd/thresholds.conf"
+#Include "/etc/collectd/filters.conf"
+#Include "/etc/collectd/thresholds.conf"
 EOF
 #------------------------------------------------------------------------
 echo "Khoi dong lai collected"
 sleep 3
 service collectd restart
 #-----------------------------------------------------------------------
-
- 
