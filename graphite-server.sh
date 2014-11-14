@@ -1,19 +1,12 @@
-
 #!/bin/bash 
-
 eth0_address=`/sbin/ifconfig eth0 | awk '/inet addr/ {print $2}' | cut -f2 -d ":" `
-echo "-------------- Cap nhat he thong ------------------"
-   apt-get update && apt-get -y dist-upgrade 
-   apt-get -y upgrade && apt-get -f install
-
-echo "-----------------Install system-------------------------"
-
+echo "------------CAP NHAT HE THONG------------------"
+apt-get update && apt-get -y dist-upgrade 
+apt-get -y upgrade && apt-get -f install
+echo "-----------------CAI DAT HE THONG-------------------------"
 apt-get install -y graphite-web graphite-carbon
-
 echo "--------------------------------------------------------"
-
-echo "--------------------Cai dat PostgreSQL-------------------"
- 
+echo "--------------------CAI DAT POSTGRESQL-------------------"
 apt-get install -y  postgresql libpq-dev python-psycopg2
 echo "---------Create a Database User and a Database------------"
 cat << EOF |sudo -u postgres psql
@@ -21,11 +14,8 @@ cat << EOF |sudo -u postgres psql
   CREATE DATABASE graphite WITH OWNER graphite;
  \q
 EOF
-
 echo " ------------------------------------------------------------"
-
-echo "------------------Cau hinh graphite web-app-----------------"
-
+echo "------------------CAU HINH GRAPHITE WEB APP-----------------"
 filecollectd=/etc/graphite/local_settings.py
 #-------------------------------------------------------
 test -f $filecollectd.bka || cp $filecollectd $filecollectd.bka
@@ -48,7 +38,6 @@ WHISPER_DIR = '/var/lib/graphite/whisper'
 LOG_DIR = '/var/log/graphite'
 INDEX_FILE = '/var/lib/graphite/search_index'  # Search index file
 USE_REMOTE_USER_AUTHENTICATION = True
-
 DATABASES = {
 'default': {
 'NAME': 'graphite',
@@ -59,25 +48,23 @@ DATABASES = {
 'PORT': ''
     }
   }
-
 EOF
 sleep 3
 #-------------------------------------------------------------------------
-echo "------ Dong bo du lieu----------------------------------------"
+echo "------DONG BO DU LIEU--------------------------------------------------------------------------------"
 sudo graphite-manage syncdb
 sleep 3
-echo "----------------Carbon configure-----------------------------"
+echo "----------------SUA FILE CAU HINH CARBON-----------------------------"
 sed -i 's/false/true/g'  /etc/default/graphite-carbon
 sleep 3
 sed -i 's/false/true/g'  /etc/carbon/carbon.conf
 echo "---------------Configure Storage------------------------------"
 sudo cp /usr/share/doc/graphite-carbon/examples/storage-aggregation.conf.example /etc/carbon/storage-aggregation.conf
 sleep 3
-echo "---Khoi dong lai dich vu carbon-cache-------------------------"
+echo "---KHOI DONG LAI DICH VU CARBON-------------------------"
 sudo service carbon-cache start
 echo "------------------------------------------------------------------------------"
-
-echo "-------------------Install and configure Apache2--------------------------------"
+echo "-----------------CAI DAT VA CAU HINH WEBSERVER--------------------------------"
 sudo apt-get  -y install apache2 libapache2-mod-wsgi
 sudo apt-get update
 #--------------------------------------------------------------------------------------
@@ -87,11 +74,8 @@ sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-availab
 #-----------------------------------------------------------------------------------
 sudo a2ensite apache2-graphite
 #--------------------------------------------------------- ------------------------- 
-echo "-----------khoi dong lai dich vu Apache2--------------------------------------"
+echo "-----------KHOI DONG LAI DICH VU APACHE--------------------------------------"
 sudo service apache2 reload
 #------------------------------------------------------------------------------------"
 echo "Truy cap vao tai khoan http://$eth0_address"
-
 #------------------------------------------------------------------------------------
-
-
