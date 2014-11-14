@@ -1,18 +1,14 @@
 #! /bin/bash
-
 eth0_address=`/sbin/ifconfig eth0 | awk '/inet addr/ {print $2}' | cut -f2 -d ":" `
 read -p "nhap host:" hs
-
-echo "--Cai dat va cau hinh Collectd tren may server-----------------------------"
+echo "--------CAI DAT VA CAU HINH COLLECTD SERVER-----------------------------"
 apt-get update
 apt-get install  -y collectd collectd-utils
 echo "------------------------------------------------------------------------------"
 echo "----------Configure--------------------"
 filecollectd=/etc/collectd/collectd.conf
 test -f $filecollectd.bka || cp $filecollectd $filecollectd.bka
-
 rm $filecollectd
-
 cat << EOF >>$filecollectd
 Hostname "$hs"
 FQDNLookup true
@@ -82,11 +78,8 @@ DataDir "/var/lib/collectd/rrd"
 <Include "/etc/collectd/collectd.conf.d">
         Filter "*.conf"
 </Include>
-
-
 EOF
-
-  echo " ---=-Khoi dong lai dich vu--=--------------"
-   service  collectd restart
-   service apache2 reload
- echo "-----------------------------------------------"
+echo " ---=-KHOI DONG DICH VU--=--------------"
+service  collectd restart
+service apache2 reload
+echo "-----------------------------------------------"
