@@ -300,8 +300,8 @@ LoadPlugin users
 <Plugin rrdtool>
     DataDir "/var/lib/collectd/rrd"
 </Plugin>
-Include "/etc/collectd/filters.conf"
-Include "/etc/collectd/thresholds.conf"
+#Include "/etc/collectd/filters.conf"
+#Include "/etc/collectd/thresholds.conf"
 ```
 Kết thúc quá trình cài đặt và cấu hình Graphite 
 
