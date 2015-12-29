@@ -258,7 +258,7 @@ sudo service collectd start
 
 ```
 -----------------
-apt-get install collect libjson-perl -y
+apt-get install collectd libjson-perl -y
 apt-get update
 ```
 
